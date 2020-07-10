@@ -19,3 +19,9 @@ f = "./tests/MSHE_UzSoilProp.uzs"
 she_file = PfsFile(f)
 she_file.saveTo(f+".tmp")
 print("{}: \t{}".format(f, filecmp.cmp(f, f+".tmp", shallow=False)))
+
+# MSHE Well file
+f = "./tests/MSHE_Wells.wel"
+she_file = PfsFile(f)
+she_file.saveTo(f+".tmp")
+print("{}: \t{}".format(f, filecmp.cmp(f, f+".tmp", shallow=False)))
