@@ -1,0 +1,100 @@
+// Created     : 2020-06-26 11:15:1
+// DLL         : C:\Program Files (x86)\DHI\2019\bin\x64\pfs2004.dll
+// Version     : 17.2.0.13162
+
+[UzSoilProp]
+   [UzSoilPropDocVersion]
+      Touched = 0
+      Version = 2
+   EndSect  // UzSoilPropDocVersion
+
+   [SOILSETUP]
+      Touched = 1
+      MzSEPfsListItemCount = 1
+      NO_SOILS = 1
+      [SoilNo_1]
+         SOILNAME = 'Braunerde'
+         HYDRCONDCURVETYPE = 2
+         RETENTIONCURVETYPE = 1
+         COMMENT = 'Sample soil'
+         BulkDensity = 1700.0
+         IncludeMacropores = 0
+         [ReteTabulated]
+            Touched = 0
+            MzSEPfsListItemCount = 0
+            PFfc = 2
+            PFw = 4.2
+            ThetaEff = 0.385
+            NO_ITEM = 0
+            Green_Ampt_Suction = -1
+         EndSect  // ReteTabulated
+
+         [ReteGenuchten]
+            Touched = 1
+            PFfc = 2
+            PFw = 4.2
+            Alpha = 0.067
+            M = 0.308437
+            N = 1.446
+            ThetaR = 0.01
+            ThetaS = 0.38
+            Green_Ampt_Suction = -1
+         EndSect  // ReteGenuchten
+
+         [ReteCamp]
+            Touched = 0
+            PFfc = 2
+            PFw = 4.2
+            Lambda = 0.14
+            ThetaS = 0.38
+            PsiB = 0.14
+            Green_Ampt_Suction = -1
+         EndSect  // ReteCamp
+
+         [HydrAverjanov]
+            Touched = 0
+            Ks = 2e-06
+            N = 13
+            ThetaR = 0.01
+            ThetaS = 0.38
+         EndSect  // HydrAverjanov
+
+         [HydrTabulated]
+            Touched = 0
+            MzSEPfsListItemCount = 0
+            NO_ITEM = 0
+            UserInputAs = 0
+         EndSect  // HydrTabulated
+
+         [HydrGenuchten]
+            Touched = 1
+            Alpha = 0.067
+            Ks = 2e-06
+            L = 0.5
+            M = 0.308437
+            N = 1.446
+         EndSect  // HydrGenuchten
+
+         [HydrCampBurd]
+            Touched = 0
+            Ks = 2e-06
+            Lambda = 0.14
+            PsiB = 0
+         EndSect  // HydrCampBurd
+
+         [Macropores]
+            Touched = 0
+            Matrix_MP = 0
+            Mp_Matrix = 0
+            Porosity = 0
+            PsiThreshold = 0
+            SaturatedConductivity = 0
+            ConductivityExponent = 0
+         EndSect  // Macropores
+
+      EndSect  // SoilNo_1
+
+   EndSect  // SOILSETUP
+
+EndSect  // UzSoilProp
+
