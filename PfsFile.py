@@ -85,8 +85,8 @@ class PfsFile:
 
         # recursive root for each top level structure
         self.rawdata = OrderedDict()
-        while line != "":
-            if len(line.strip()) and line.strip()[0] == "[":
+        while line != "":  # end of file
+            if len(line.strip()) and line.strip()[0] == "[": 
                 top_level_name = line.strip().strip("[").strip("]")
                 self.rawdata[top_level_name] = OrderedDict()
                 self._loadNestedItem(self.rawdata[top_level_name], infile)
@@ -109,7 +109,7 @@ class PfsFile:
             if type(item) == OrderedDict:  # is child
                 outfile.write(indentation * ' ' + '[' + str(itemname) + ']\n')
                 self._saveNestedItem(item, outfile, indentation + 3)
-                outfile.write(indentation * ' ' + ' EndSect  // ' + str(itemname) + '\n')
+                outfile.write(indentation * ' ' + 'EndSect  // ' + str(itemname) + '\n\n')
             else:  # is property
                 outfile.write(indentation * ' ' + str(itemname) + ' = ' + str(item) + '\n')
 
