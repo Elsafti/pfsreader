@@ -111,7 +111,7 @@ class PfsFile:
                 self._saveNestedItem(item, outfile, indentation + 3)
                 outfile.write(indentation * ' ' + 'EndSect  // ' + str(itemname.strip("[").strip("]")) + '\n\n')
             else:  # is property
-                outfile.write(indentation * ' ' + str(itemname) + ' = ' + str(item) + '\n')
+                outfile.write(indentation * ' ' + str(itemname) + ' = ' + str(item).strip() + '\n')
 
     def saveTo(self, filename):
         """
