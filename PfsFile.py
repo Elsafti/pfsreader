@@ -30,7 +30,7 @@ class PfsFile:
         line = infile.readline()  # start recursive action
         while "EndSect" not in line and len(line) > 0:  # abort recursive action if End of Section is reached or EOF
             if len(line.strip()) and line.strip()[0] == "[":
-                child_name = line.strip().strip("[").strip("]")
+                child_name = line.strip()
                 parent[child_name] = OrderedDict()
                 self._loadNestedItem(parent[child_name], infile)
             if "=" in line:
@@ -76,10 +76,10 @@ class PfsFile:
             if "// Created" in line:
                 self.created = line.strip("//")
                 continue
-            if "// DLL id" in line:
+            if "// DLL id" in line or "// DLL" in line:
                 self.dllid = line.strip("//")
                 continue
-            if "// PFS version" in line:
+            if "// PFS version" in line or "// Version" in line:
                 self.pfsversion = line.strip("//")
                 continue
 
@@ -87,7 +87,7 @@ class PfsFile:
         self.rawdata = OrderedDict()
         while line != "":  # end of file
             if len(line.strip()) and line.strip()[0] == "[": 
-                top_level_name = line.strip().strip("[").strip("]")
+                top_level_name = line.strip()
                 self.rawdata[top_level_name] = OrderedDict()
                 self._loadNestedItem(self.rawdata[top_level_name], infile)
             line = infile.readline()
@@ -107,9 +107,9 @@ class PfsFile:
         for itemname in parent.keys():  # iterate through properties and childs
             item = parent[itemname]
             if type(item) == OrderedDict:  # is child
-                outfile.write(indentation * ' ' + '[' + str(itemname) + ']\n')
+                outfile.write(indentation * ' ' + str(itemname) + '\n')
                 self._saveNestedItem(item, outfile, indentation + 3)
-                outfile.write(indentation * ' ' + 'EndSect  // ' + str(itemname) + '\n\n')
+                outfile.write(indentation * ' ' + 'EndSect  // ' + str(itemname.strip("[").strip("]")) + '\n\n')
             else:  # is property
                 outfile.write(indentation * ' ' + str(itemname) + ' = ' + str(item) + '\n')
 
