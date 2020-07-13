@@ -1,0 +1,309 @@
+// Created     : 2007-10-4 16:16:21
+// DLL id      : c:\Work\main\Products\bin\pfs2004.dll
+// PFS version : Sep 26 2007 20:48:35
+
+[MIKESHE_WaterBalance]
+   FileVersion = 2
+   [Extraction_Step]
+      Touched = 1
+      WMResultFileName = |..\Result\Karup_Example.SHE - Result Files\Karup_Example.Sheres|
+      Catchment_Or_SubCatchment = 1
+      Area_Or_SingleCell = 1
+      UseDefaultPreName = 1
+      GrossListFilePreNameUserSpec = ||
+      GrossListFilePreName = |..\Result\Karup_Example.SHE - Result Files\Karup_Example_1_1|
+      Type = 1
+      Dfs2ItemName = ''
+      Shp2ItemName = ''
+      ShapeAxisUnit = 1000
+      [DFS_2D_DATA_FILE]
+         Touched = 1
+         FILE_NAME = ||
+         ITEM_COUNT = 1
+         ITEM_NUMBERS = 1
+      EndSect  // DFS_2D_DATA_FILE
+
+      [SHAPE_FILE]
+         Touched = 1
+         FILE_NAME = ||
+         ITEM_COUNT = 1
+         ITEM_NUMBERS = ''
+      EndSect  // SHAPE_FILE
+
+   EndSect  // Extraction_Step
+
+   [Postprocessing_Steps]
+      Touched = 1
+      MzSEPfsListItemCount = 7
+      NO_POSTPROCESSINGS = 7
+      AlternativeConfigFileName = ||
+      DefaultOrAlternativeConfigFile = 1
+      [WaterBalance_Postprocessing_1]
+         Postprocessing_Name = 'Chart'
+         Comment = ''
+         WaterBalanceType = 'TOTAL_CHART'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 720
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 1
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\ChartWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_1
+
+      [WaterBalance_Postprocessing_2]
+         Postprocessing_Name = 'Total'
+         Comment = ''
+         WaterBalanceType = 'TOTAL'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\TotalWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_2
+
+      [WaterBalance_Postprocessing_3]
+         Postprocessing_Name = 'Overland'
+         Comment = ''
+         WaterBalanceType = 'OL'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\OLWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_3
+
+      [WaterBalance_Postprocessing_4]
+         Postprocessing_Name = 'Unsaturated zone'
+         Comment = ''
+         WaterBalanceType = 'UZ'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\UZWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_4
+
+      [WaterBalance_Postprocessing_5]
+         Postprocessing_Name = 'Saturated zone'
+         Comment = ''
+         WaterBalanceType = 'SZ'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\SZWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_5
+
+      [WaterBalance_Postprocessing_6]
+         Postprocessing_Name = 'Snow Melt'
+         Comment = ''
+         WaterBalanceType = 'SM'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\SMWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_6
+
+      [WaterBalance_Postprocessing_7]
+         Postprocessing_Name = 'Detailed Snow Melt'
+         Comment = ''
+         WaterBalanceType = 'SM_DETAIL'
+         StartDate = 1970, 2, 1, 0, 0
+         EndDate = 1980, 12, 5, 0, 0
+         OutputTimestep_Hrs = 2160
+         OutputType_Inc_Or_Acc = 2
+         AllOrSpecifiedLayer = 1
+         SZLayer = 0
+         SubCatchmentNumber = 0
+         SingleCell_IX = 0
+         SingleCell_IY = 0
+         OutputAsTableOrDfs0File = 1
+         SelectedPolygonNumber = 1
+         SelectedPolygonName = ''
+         UseDefaultDates = 1
+         UseDefaultOutputTimestep = 0
+         TableOutputFileName = |..\Result\Karup_Example.SHE - Result Files\SMDetailedWBL.txt|
+         Dfs0OutputFileName = ||
+         Dfs2OutputFileName = ||
+         [TIME_SERIES_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // TIME_SERIES_FILE
+
+         [DFS_2D_DATA_FILE]
+            Touched = 1
+            FILE_NAME = ||
+            ITEM_COUNT = 1
+            ITEM_NUMBERS = 1
+         EndSect  // DFS_2D_DATA_FILE
+
+      EndSect  // WaterBalance_Postprocessing_7
+
+   EndSect  // Postprocessing_Steps
+
+EndSect  // MIKESHE_WaterBalance
+
+[SYSTEM]
+   ResultRootFolder = |..\Result|
+   UseCustomResultFolder = false
+   CustomResultFolder = ||
+EndSect  // SYSTEM
+
