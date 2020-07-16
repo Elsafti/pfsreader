@@ -1,7 +1,5 @@
 __author__ = 'are'
 
-from collections import OrderedDict
-
 
 class PfsFile:
     """
@@ -26,14 +24,115 @@ class PfsFile:
         if filename:
             self.loadFrom(filename)
 
+
+    def getItemValue(self,parent,key,order=None):
+        indecies=[i for i, e in enumerate(parent) if e == key]
+        if(len(indecies)==0):
+            raise Exception("Error: Key: "+str(key)+" is not a key in the given target/section!")
+        if(len(indecies)>1 and order==None):
+            print("WARNING: key "+str(key)+" is not unique in the given target/section! Please provide an order for the key!")
+            return parent[indecies[0]+1]
+        elif (order!=None and order>=len(indecies)):
+            raise Exception("Error: key "+str(key)+" was not found at the given order or key not found!")
+        else:
+            if(order==None): order=0
+            return parent[indecies[order]+1]
+
+    def getItemIndex(self,parent,key,order=None):
+        indecies=[i for i, e in enumerate(parent) if e == key]
+        if(len(indecies)==0):
+            raise Exception("Error: Key: "+str(key)+" is not a key in the given target/section!")
+        if(len(indecies)>1 and order==None):
+            print("WARNING: key "+str(key)+" is not unique in the given target/section! Please provide an order for the key!")
+            return parent[indecies[0]]
+        elif (order!=None and order>=len(indecies)):
+            print("Error: key "+str(key)+" was not found at the given order or key not found!")
+        else:
+            if(order==None): order=0
+            return (indecies[order]+1)
+        
+    def getItemString(self, parent,indentation=0):
+        string=''
+        if (type(parent) != list):
+            return parent
+        for index in range(0,len(parent),2):
+            itemname = parent[index]
+            item     = parent[index+1]
+            if type(item) == list:
+                string+=(indentation * ' ' + str(itemname) + '\n')
+                string+=self.getItemString(item, indentation + 3)
+                string+=(indentation * ' ' + 'EndSect  // ' + str(itemname.strip("[").strip("]")) + '\n\n')
+            else:
+                if str(item).strip() == "True":
+                    item = "true"
+                if str(item).strip() == "False":
+                    item = "false"
+
+                string+=(indentation * ' ' + str(itemname) + ' = ' + str(item).strip() + '\n')
+        return string
+                
+    def __getitem__(self, key):
+        reqRawdata=self.rawdata
+        for i, e in enumerate(key):
+            if(i<(len(key)-1) and type(key[i+1])==int ):
+                reqRawdata=self.getItemValue(reqRawdata,e,key[i+1])
+            elif(type(e)!=int):
+                reqRawdata=self.getItemValue(reqRawdata,e)
+        return self.getItemString(reqRawdata)
+
+    def __setitem__(self, key, value):
+        dummy=self.__getitem__(key)
+        if(type(dummy)!=type(value)):
+            raise Exception("Error: type of given value does not match type of referred item!")
+        
+        index=[]
+        accSections=[self.rawdata]
+        order=0
+        if(type(key[1])==int):
+            order=key[1]
+        else:
+            order=0
+        indecies=[i for i, e in enumerate(self.rawdata) if e == key[0]]
+        index.append(indecies[order])
+        for i, aKey in enumerate(key):
+            if(i<(len(key)-1) and type(key[i+1])==int):
+                order=key[i+1]
+            else:
+                order=0
+            if(type(aKey)!=int):
+                index.append(self.getItemIndex(accSections[-1],aKey,order))
+                accSections.append(accSections[-1][index[-1]])
+        for i, section in enumerate(accSections):
+            if(i==0):
+                accSections[-1]=value
+            else:
+                accSections[len(accSections)-1-i][index[len(index)-i]]=accSections[len(accSections)-i]
+                
+        self.rawdata = accSections[0]
+
+    # TODO (please don't remove)
+
+    #def copy(self):
+    #    make new subsections as copy of existing 
+    
+    #def __delitem__(self, key):
+    #    del self.__dict__[key]
+
+    #def __contains__(self, key):
+    #    return key in self.__dict__
+
+    #def __len__(self):
+    #    return len(self.__dict__)
+
     def _loadNestedItem(self, parent, infile):  # recursive function that loads all objects into a tree of dictionaries
         line = infile.readline()  # start recursive action
         while "EndSect" not in line and len(line) > 0:  # abort recursive action if End of Section is reached or EOF
             if len(line.strip()) and line.strip()[0] == "[":
                 child_name = line.strip()
-                parent[child_name] = OrderedDict()
-                self._loadNestedItem(parent[child_name], infile)
-            if "=" in line:
+                parent.append(child_name)
+                parent.append([])
+                self._loadNestedItem(parent[-1], infile)
+            elif "=" in line:
                 field_name, field_value = line.split("=")
                 if field_value[1] == "\'":  # field value is a string
                     while field_value.strip()[-1] != "\'":
@@ -54,7 +153,8 @@ class PfsFile:
                     except ValueError:
                         pass
                 field_name = field_name.strip()
-                parent[field_name] = field_value
+                parent.append(field_name) 
+                parent.append(field_value)
             line = infile.readline()
 
     ## Parses contents from file into rawdata structure
@@ -69,6 +169,7 @@ class PfsFile:
 
         # read metadata
         line = ""
+        # TODO Change to one variable called header containing all lines starting with // 
         while "[" not in line:  # iterate until first top level branch
             line = infile.readline()
             if len(line.strip()) < 1:
@@ -84,12 +185,13 @@ class PfsFile:
                 continue
 
         # recursive root for each top level structure
-        self.rawdata = OrderedDict()
+        self.rawdata = [] 
         while line != "":  # end of file
             if len(line.strip()) and line.strip()[0] == "[": 
                 top_level_name = line.strip()
-                self.rawdata[top_level_name] = OrderedDict()
-                self._loadNestedItem(self.rawdata[top_level_name], infile)
+                self.rawdata.append(top_level_name) 
+                self.rawdata.append([]) 
+                self._loadNestedItem(self.rawdata[-1], infile)
             line = infile.readline()
 
         # finalize
@@ -104,9 +206,10 @@ class PfsFile:
         :type indentation: int
         :return:
         """
-        for itemname in parent.keys():  # iterate through properties and childs
-            item = parent[itemname]
-            if type(item) == OrderedDict:  # is child
+        for index in range(0,len(parent),2): # iterate through properties and children
+            itemname = parent[index]
+            item     = parent[index+1]
+            if type(item) == list: # is child
                 outfile.write(indentation * ' ' + str(itemname) + '\n')
                 self._saveNestedItem(item, outfile, indentation + 3)
                 outfile.write(indentation * ' ' + 'EndSect  // ' + str(itemname.strip("[").strip("]")) + '\n\n')
