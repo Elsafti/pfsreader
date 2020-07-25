@@ -31,7 +31,7 @@ class PfsFile:
         while "EndSect" not in line and len(line) > 0:  # abort recursive action if End of Section is reached or EOF
             if len(line.strip()) and line.strip()[0] == "[":
                 child_name = line.strip()
-                parent[child_name] = OrderedDict()
+                parent[child_name] = OrderedDict()  # liste
                 self._loadNestedItem(parent[child_name], infile)
             if "=" in line:
                 field_name, field_value = line.split("=")
@@ -54,7 +54,7 @@ class PfsFile:
                     except ValueError:
                         pass
                 field_name = field_name.strip()
-                parent[field_name] = field_value
+                parent[field_name] = field_value  # liste
             line = infile.readline()
 
     ## Parses contents from file into rawdata structure
@@ -84,12 +84,12 @@ class PfsFile:
                 continue
 
         # recursive root for each top level structure
-        self.rawdata = OrderedDict()
+        self.rawdata = OrderedDict()  # in Liste umwandeln
         while line != "":  # end of file
             if len(line.strip()) and line.strip()[0] == "[": 
                 top_level_name = line.strip()
-                self.rawdata[top_level_name] = OrderedDict()
-                self._loadNestedItem(self.rawdata[top_level_name], infile)
+                self.rawdata[top_level_name] = OrderedDict()  # liste
+                self._loadNestedItem(self.rawdata[top_level_name], infile)  # liste
             line = infile.readline()
 
         # finalize
