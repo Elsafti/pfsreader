@@ -81,9 +81,17 @@ class PfsFile:
         return self.getItemString(reqRawdata)
 
     def __setitem__(self, key, value):
+
+        # check if the values can be casted
         dummy=self.__getitem__(key)
         if(type(dummy)!=type(value)):
-            raise Exception("Error: type of given value does not match type of referred item!")
+
+                if type(dummy) == int and type(value) == float:
+                    # In this case, a round number was previously saved in the PFS and accordingly parsed as int.
+                    # We assume since now a float is to be applied that this is legal (must be ensured by the user)
+                    Warning("Error: Type mismatch while trying to assign {} on {}".format(type(value), type(dummy)))
+                else:
+                    raise RuntimeError("Error: Type mismatch while trying to assign {} on {}".format(type(value), type(dummy)))
         
         index=[]
         accSections=[self.rawdata]
